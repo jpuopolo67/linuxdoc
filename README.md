@@ -28,4 +28,12 @@ A place to capture Linux learning
 * mandb - refresh man pages
 * pinfo - a documentation system like man
 * pwd - print working directory
-* 
+* cd - change directory
+* tr - translate characters
+  
+## Key Directories
+/usr/share/doc - doc for installed packages
+
+## Interesting Commands
+uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n'
+uname -a | tr ' ' '\n'
