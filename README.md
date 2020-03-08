@@ -5,6 +5,7 @@ A place to capture Linux learning
 *Note* most commands accept --help
 
 * ^L - clear the screen
+* ^R - search in console command history
 * whoami - displays current user
 * who am i - displays current user plus addition info
 * hostname - information about the current host
@@ -64,7 +65,11 @@ you have an X Server on your client.
 * ssh-copy-id - copies keys to remote server 
 * scp - securely copy a file, etc. to a remote server over ssh
 * tee - combines redirection and piping, i.e., write out + send as input to another command
-* 
+* env - display environment variables
+* VARNAME=VARVALUE to define a shell variable
+* export VARNAME makes VARNAME available in subshells
+* alias - define aliases
+
   
 ## Key Directories
 * /usr/share/doc - doc for installed packages
