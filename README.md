@@ -54,7 +54,7 @@ A place to capture Linux learning
 ## Interesting Commands
 
 uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n' <br/>
-uname -a | tr ' ' '\n'<br/>
-find ./ -name "*.class"
-find ./ -name "*.class" -exec cp {} tmp/ \;
+uname -a | tr ' ' '\n' <br/>
+find ./ -name "\*.class" <br/>
+find ./ -name "\*.class" -exec cp {} tmp/ \;
 
