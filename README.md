@@ -30,10 +30,31 @@ A place to capture Linux learning
 * pwd - print working directory
 * cd - change directory
 * tr - translate characters
+* ls - list files
+* mount - attach storage to a file system directory
+* find - find files and directories by name, size, owner, etc.
+* 
+  
+  
   
 ## Key Directories
+
 /usr/share/doc - doc for installed packages
+/var - system-created files, e.g., /var/log - system log files
+/bin -> /usr/bin, /sbin -> root command/system binaries
+/usr - contains all of the binaries etc. that computer uses
+/dev - device files - provide access to hardware
+/etc - configuration file - mostly text
+/opt - application file, e.g., databases
+/proc - running processes
+
+
+
 
 ## Interesting Commands
-uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n'
-uname -a | tr ' ' '\n'
+
+uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n' <br/>
+uname -a | tr ' ' '\n'<br/>
+find ./ -name "*.class"
+find ./ -name "*.class" -exec cp {} tmp/ \;
+
