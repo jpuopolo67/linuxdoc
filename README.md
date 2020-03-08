@@ -6,11 +6,11 @@ A place to capture Linux learning
 
 * ^L - clear the screen
 * whoami - displays current user
+* who am i - displays current user plus addition info
 * hostname - information about the current host
 * uname - prints system info
 * man <section #1-9> help - man pages
-  man -k <keyword> or apropos
-  sections 1, 5, 8 most important in general
+* man -k <keyword> or apropos: sections 1, 5, 8 most important in general
 * file - information about a file
 * xxd - hex viewer
 * date - see date
@@ -21,6 +21,7 @@ A place to capture Linux learning
 * less - text viewer/pager
 * su - switch user (su - = open login shell), e.g., su - to switch to root on centos (redhat)
 * sudo -i (ubuntu)
+* sudo -s (AWS EC2 instance - activates root shell)
 * sudo <cmd> - run <cmd> as root
 * wc - word/line count
 * grep - filtering utility
@@ -55,7 +56,16 @@ A place to capture Linux learning
 * tr - translate characters
 * awk - search for specific patterns
 * sed - powerful stream editor
-
+* chvt - change virtual terminal
+* who - list of users logged into the system with tty connections
+* ssh - login into a remote computer. Note ssh -X will enable graphical windows if
+you have an X Server on your client. 
+* ssh-keygen - generates public/private key pair
+* ssh-copy-id - copies keys to remote server 
+* scp - securely copy a file, etc. to a remote server over ssh
+* tee - combines redirection and piping, i.e., write out + send as input to another command
+* 
+  
 ## Key Directories
 * /usr/share/doc - doc for installed packages
 * /var - system-created files, e.g., /var/log - system log files
@@ -85,6 +95,7 @@ A place to capture Linux learning
 * grep ^abc regfile
 * grep '^abc' regfile
 * grep 'abc$' regfile
+* grep '\<alex\>' namefile
 * egrep 'ab{2}c' regfile
 * egrep 'a[bB]c' regfile
 * egrep '(123)' regfile
@@ -100,12 +111,29 @@ A place to capture Linux learning
 * awk -F : '{ print $4 }' /etc/passwd
 * awk -F : '{ print $4 }' /etc/passwd | sort -n
 * awk -F : '/amy/ { print $4 }' /etc/passwd 
-* >> (bash redirection)
-* 2> (redirect standard error), e.g., 2>/dev/null
+* su - amy
+* sudo visudo (editor for sudo configuration)
+* sort < /etc/passwd
+* sort < /etc/passwd > outfile
+* ls > myfile
+* echo "more text" >> myfile
+* grep -R root /proc 2>/dev/null
+* ps aux | tee psfile | grep ssh
+* history -c, history -w 
 
+## Redirection
+* Standard input (0): <
+* Standard output (1): >, >>
+* Standard error (2): 2>, e.g., 2>/dev/null
+* &>: redirect both stdout and stderr
 
 ## Important Ideas
-* All the work is done by the kernel
+* All the work on the machine is ultimately done by the kernel
+* "Kernel land" is the land of core os, drivers and hardware
+* "User land" is where user processes live
+* User "root" lives in kernel land - so has no restrictions
+* To cross from "user land" or "kernel land", user program make system library calls
+* A shell is an interface into the OS
 * Linux is very file-oriented - "everything is a file"
 * Files are associated with one and only one *inode* (file metadata/admin data)
 * Hard links point directly to inodes
