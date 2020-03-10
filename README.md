@@ -80,7 +80,7 @@ you have an X Server on your client.
 * whatis - describes a command
 * vipw, vigr - vi editors to edit passwd and group files safely
 * loginctl - session management
-* 
+* ip addr, iplink
   
 ## Key Directories
 * /usr/share/doc - doc for installed packages
