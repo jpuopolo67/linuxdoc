@@ -1,79 +1,95 @@
 # linuxdoc
 A place to capture Linux learning
 
-# Essential Commands
+## Essential Commands
 *Note* most commands accept --help
 
-* ^L - clear the screen
-* ^R - search in console command history
-* whoami - displays current user
-* who am i - displays current user plus addition info
-* hostname - information about the current host
-* uname - prints system info
+### Console Commands
+* ^l - clear the screen
+* ^r - search in console command history
+* ^a - go to beginning of command line
+* ^e - go to end of command line
+* ^u - clear command line
+* !<#> - run command <#> from history
+
+### Help & Doc
+* mandb - refresh man pages
+* man man
 * man <section #1-9> help - man pages
 * man -k <keyword> or apropos: sections 1, 5, 8 most important in general
-* file - information about a file
-* xxd - hex viewer
+* whereis - locate the binary, source, and manual page files for a command
+* which - shows the full path of (shell) commandsq
+* whatis - display manual page descriptions
+* pinfo - a documentation system like man
+
+### User-Oriented
+* whoami - displays current user
+* who am i - displays current user plus addition info
+* w - display who is logged in and what they are doing
+* id - get user identity
+* passwd - work with passwords
+* last - shows last logins
+* su - switch user (su - = open login shell), e.g., su - to switch to root on centos (redhat)
+* sudo -i (ubuntu) or sudo -s (AWS EC2 instance - activates root shell)
+* sudo <cmd> - run <cmd> as root
+
+### System-Oriented
+* hostname - information about the current host
+* uname - prints system info
 * date - see date
 * cal - see calendar
-* passwd - work with passwords
-* touch - create empty file/update metadata
-* last - shows last logins
-* less - text viewer/pager
-* su - switch user (su - = open login shell), e.g., su - to switch to root on centos (redhat)
-* sudo -i (ubuntu)
-* sudo -s (AWS EC2 instance - activates root shell)
-* sudo <cmd> - run <cmd> as root
-* wc - word/line count
-* grep - filtering utility
-* mandb - refresh man pages
-* pinfo - a documentation system like man
-* pwd - print working directory
-* cd - change directory
-* tr - translate characters
-* ls - list files
-* mount - attach storage to a file system directory
-* cp - copy files
-* mv - move or rename files
-* mkdir - make a directory (my alias md does mkdir -p to make a path)
-* rm - remove files and directoies
-* ln - make a hard link (directly to inode) or symbolic link (to hard link)
-* cd - change directory 
-* !<#> - repeate commnad # from bash history
-* history - get a list of past shell commands
-* find - find files and directories by name, size, owner, etc.
+
+### Shell-Oriented
 * time <command> - times the given shell command
+* history - get a list of past shell commands
 * xargs - accepts pipe input and works on it line-by-line (element by element)
-* tar - create an archive, e.g., tar -cvf, tar -xvf, tar -tvf 
-* gzip - most common compression utility
-* dd - copy block devices
-* tree - display directories, subdirectories and files in a clear manner
-* head, tail - see top or bottom of file
-* cat, tac - display or concat files, tac does it in reverse
-* ps - show processes
-* egrep - "grep" that can use extended regular expression
-* cut - filter output from a text file or stream
-* sort - sort files or streams, often used in pipes
-* tr - translate characters
-* awk - search for specific patterns
-* sed - powerful stream editor
 * chvt - change virtual terminal
-* who - list of users logged into the system with tty connections
-* ssh - login into a remote computer. Note ssh -X will enable graphical windows if
-you have an X Server on your client. 
-* ssh-keygen - generates public/private key pair
-* ssh-copy-id - copies keys to remote server 
-* scp - securely copy a file, etc. to a remote server over ssh
-* tee - combines redirection and piping, i.e., write out + send as input to another command
 * env - display environment variables
 * VARNAME=VARVALUE to define a shell variable
 * export VARNAME makes VARNAME available in subshells
+* echo $VARNAME - display value of shell variable $VARNAME
 * alias - define aliases
-* chown - change owner
-* chgrp - change group
-* chmod - change permissions/mode
-* suid, sgid, sticky - special permissions - run as a given user or group owner
-* umask - define a mask that will be subtracted from the default permissions, set in /etc/profile
+
+### Directories & Files
+* mkdir - make a directory (-p option for hierarchy)
+* pwd - print working directory
+* cd - change directory
+* rm - remove directories and files 
+* ls - list files
+* tree - display directories, subdirectories and files in a clear manner
+* touch - create empty file/update metadata
+* file - information about a file
+* cat, tac - display or concat files, tac does it in reverse
+* less - text viewer/pager
+* cp - copy files
+* mv - move or rename files
+* ln - make a hard link (directly to inode) or symbolic link (to hard link)
+* wc - word/line count
+* head - show beginning of file
+* tail - show end of file
+* cut - remove sections from each line of files
+* xxd - hex viewer
+* tr - translate characters
+* sort - sort files or streams, often used in pipes
+* tee - combines redirection and piping, i.e., write out + send as input to another command
+* gzip - most common compression utility
+* find - find files and directories by name, size, owner, etc.
+* grep - search and filter
+* egrep - "grep" that can use extended regular expression
+* awk - text processing, search for specific patterns
+* sed - powerful command-line stream editor
+* fuser - show which processes use the named files, sockets, or filesystems 
+
+### Process Management
+* ps - show processes
+* kill - kills a process
+* top
+
+
+### Disks & Storage
+* mount - attach storage to a file system directory
+* tar - create an archive, e.g., tar -cvf, tar -xvf, tar -tvf 
+* dd - copy block devices
 * cfdisk - display or manipulate a partition table
 * fdisk - manipulate disk partition table
 * gdisk - interactive GUID partition table (GPT) manipulator 
@@ -84,24 +100,56 @@ you have an X Server on your client.
 * umount - unmount a file system
 * lsof - list open files/what process is using a file
 * findmnt - find out what is mounted and where
+
+### Network & Connectivity
 * ip - manipulate IP information
 * dhclient - run DHCP client/obtain IP address
 * ping - send ICMP packet
-* netstat - print network connections, routing tables, interface statistics, masquerade connections, and multicast memberships
-* ss - more modern alternative to netstat
+* netstat - print network connections, routing tables, interface statistics, etc.
+* ss - modern alternative to netstat
 * nmap - network exploration tool and security & port scanner
 * dig - DNS lookup utility
 * hostname - show or set system's hostname
 * hostnamectl - control the system hostname
-* fuser - Show which processes use the named files, sockets, or filesystems 
-* date - print or set systen date and time
+* ssh - login into a remote computer. Note ssh -X will enable graphical windows if you have an X Server on your client. 
+* ssh-keygen - generates public/private key pair
+* ssh-copy-id - copies ssh keys to remote server 
+* scp - securely copy a file, etc. to a remote server over ssh
+
+### Accounts & Permission Management
+* useradd - create users
+* usermod - modifiy user
+* userdel - delete user
+* passwd - manage users passwords
+* chage - change password properties
+* id - get user identity
+* groupadd, groupmod, groupdel - add, modify, delete groups
+* getent - get info from administrative databases
+* chown - change owner
+* chgrp - change group
+* chmod - change permissions/mode
+* suid, sgid, sticky - special permissions - run as a given user or group owner
+* umask - define a mask that will be subtracted from the default permissions, set in /etc/profile
+* vipw, vigr - editing tools for editing the password/shadow files and group files securely
+* loginctl - performs session management
+
+### Date & Time
 * hwclock - query or set hardware clock
 * timedatectl - control system time and date
 * ntpdate - set the date and time via ntp
 * chronyc sources - ntp server info (stratum 1=atomic clock -> 16=error)
 
-  
-  
+### systemd
+* Manages everything
+* Kernel starts systemd -> starts all services
+* Event-driven (reacts)
+* Systemd manages items called "units"
+* /usr/lib/systemd/system
+* systemctl <command> - control commands and services
+	* systemctl service <service>
+	* systemctl list-unit-files
+	* etc.
+
 ## Key Directories
 * /usr/share/doc - doc for installed packages
 * /var - system-created files, e.g., /var/log - system log files
@@ -112,9 +160,10 @@ you have an X Server on your client.
 * /opt - application file, e.g., databases
 * /proc - running processes
 * /dev/zero - "file" that produces zero bytes 
+* /dev/null - swallows unwanted out (byte abyss)
 * /etc/services - services and network configurations for them/with names
 
-## Interesting Command Examples
+## Command Examples
 * ip a
 * ip route show
 * ip a a dev eth0 1.2.3.4/8
