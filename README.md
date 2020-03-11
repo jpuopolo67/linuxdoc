@@ -93,7 +93,7 @@ you have an X Server on your client.
 * dig - DNS lookup utility
 * hostname - show or set system's hostname
 * hostnamectl - control the system hostname
-* 
+* fuser - Show which processes use the named files, sockets, or filesystems 
   
 ## Key Directories
 * /usr/share/doc - doc for installed packages
