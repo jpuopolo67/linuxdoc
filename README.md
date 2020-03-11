@@ -84,12 +84,22 @@ you have an X Server on your client.
 * umount - unmount a file system
 * lsof - list open files/what process is using a file
 * findmnt - find out what is mounted and where
+* ip - manipulate IP information
+* dhclient - run DHCP client/obtain IP address
+* ping - send ICMP packet
+* netstat - print network connections, routing tables, interface statistics, masquerade connections, and multicast memberships
+* ss - more modern alternative to netstat
+* nmap - network exploration tool and security & port scanner
+* dig - DNS lookup utility
+* hostname - show or set system's hostname
+* hostnamectl - control the system hostname
+* 
   
 ## Key Directories
 * /usr/share/doc - doc for installed packages
 * /var - system-created files, e.g., /var/log - system log files
 * /bin -> /usr/bin, /sbin -> root command/system binaries
-* /usr - contains all of the binaries etc. that computer uses
+* /usr - contaqins all of the binaries etc. that computer uses
 * /dev - device files - provide access to hardware
 * /etc - configuration file - mostly text
 * /opt - application file, e.g., databases
@@ -97,6 +107,10 @@ you have an X Server on your client.
 * /dev/zero - "file" that produces zero bytes 
 
 ## Interesting Command Examples
+* ip a
+* ip route show
+* ip a a dev eth0 1.2.3.4/8
+* cat /etc/resolv.conf
 * mount | grep '^/dev'
 * uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n' 
 * uname -a | tr ' ' '\n' 
