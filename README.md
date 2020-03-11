@@ -94,6 +94,13 @@ you have an X Server on your client.
 * hostname - show or set system's hostname
 * hostnamectl - control the system hostname
 * fuser - Show which processes use the named files, sockets, or filesystems 
+* date - print or set systen date and time
+* hwclock - query or set hardware clock
+* timedatectl - control system time and date
+* ntpdate - set the date and time via ntp
+* chronyc sources - ntp server info (stratum 1=atomic clock -> 16=error)
+
+  
   
 ## Key Directories
 * /usr/share/doc - doc for installed packages
