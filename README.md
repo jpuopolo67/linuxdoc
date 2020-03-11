@@ -59,7 +59,6 @@ A place to capture Linux learning
 * sed - powerful stream editor
 * chvt - change virtual terminal
 * who - list of users logged into the system with tty connections
-* w - list of users and what they are doing
 * ssh - login into a remote computer. Note ssh -X will enable graphical windows if
 you have an X Server on your client. 
 * ssh-keygen - generates public/private key pair
@@ -70,17 +69,21 @@ you have an X Server on your client.
 * VARNAME=VARVALUE to define a shell variable
 * export VARNAME makes VARNAME available in subshells
 * alias - define aliases
-* useradd, usermod, userdel - user management
-* groupadd, groupmod, groupdel - group management
-* getent - get entry from administrative database
-* id - get info for a user
-* chown, chgrp, chmod, umask - manage permissions
-* type <command> - tells us about the command
-* whereis, which - determines binary
-* whatis - describes a command
-* vipw, vigr - vi editors to edit passwd and group files safely
-* loginctl - session management
-* ip addr, iplink
+* chown - change owner
+* chgrp - change group
+* chmod - change permissions/mode
+* suid, sgid, sticky - special permissions - run as a given user or group owner
+* umask - define a mask that will be subtracted from the default permissions, set in /etc/profile
+* cfdisk - display or manipulate a partition table
+* fdisk - manipulate disk partition table
+* gdisk - interactive GUID partition table (GPT) manipulator 
+* lsblk - list block devices
+* partprobe - update kernel after changing partition table
+* mkfs - make file system (various types available, e.g., xfs is default on many distributions)
+* mount - attach a partition and file system to a directory
+* umount - unmount a file system
+* lsof - list open files/what process is using a file
+* findmnt - find out what is mounted and where
   
 ## Key Directories
 * /usr/share/doc - doc for installed packages
@@ -92,13 +95,9 @@ you have an X Server on your client.
 * /opt - application file, e.g., databases
 * /proc - running processes
 * /dev/zero - "file" that produces zero bytes 
-* /etc/profile - config that applies to all users
-* /etc/default/skel - directory structure and config that applies to all newly created users
-* ~./bash_profile - user-specifc profile info run on every login shell
-* ~./bashrc - user-specific info run for every subshell
-* ~./bash_logout - run when a user logs out. can contain shell scripts, etc. to do cleanup.
 
 ## Interesting Command Examples
+* mount | grep '^/dev'
 * uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n' 
 * uname -a | tr ' ' '\n' 
 * find ./ -name "\*.class" 
@@ -141,6 +140,8 @@ you have an X Server on your client.
 * grep -R root /proc 2>/dev/null
 * ps aux | tee psfile | grep ssh
 * history -c, history -w 
+* chmod g+s /data/account - sets groupid for directory /data/account
+* touch file{a..z} - create a range of files: filea, fileb, ..., filez
 
 ## Redirection
 * Standard input (0): <
@@ -160,4 +161,7 @@ you have an X Server on your client.
 * Hard links point directly to inodes
 * Symbolic links point to hard links, not directly to inodes
 * To prevent the shell from interpreting wildcards before a command can interpret them, use '*'
-* User ownership > group ownership. Owner of directory can delete files even if they don't own them.
+* User ownership > group ownwerhip and Linux uses short-circuit evaluation on permissions
+* Write permission to a **directory** enables deletion of files - even if you don't own the file!
+* Sticky bit enforces that the owner of the directory or file is only allowed to delete a file
+* VFAT is the only filesystem compatible among Windows, Linux and MacOS
