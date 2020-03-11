@@ -105,12 +105,14 @@ you have an X Server on your client.
 * /opt - application file, e.g., databases
 * /proc - running processes
 * /dev/zero - "file" that produces zero bytes 
+* /etc/services - services and network configurations for them/with names
 
 ## Interesting Command Examples
 * ip a
 * ip route show
 * ip a a dev eth0 1.2.3.4/8
 * cat /etc/resolv.conf
+* ss -tuna
 * mount | grep '^/dev'
 * uname -a | cut -d' ' -f1,2,3,4,5,6,7,8,9,10,11,12 | tr ' ' '\n' 
 * uname -a | tr ' ' '\n' 
