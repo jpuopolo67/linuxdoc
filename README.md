@@ -100,6 +100,9 @@ A place to capture Linux learning
 * umount - unmount a file system
 * lsof - list open files/what process is using a file
 * findmnt - find out what is mounted and where
+* df - display free disk space
+* du - display disk usage stats
+
 
 ### Network & Connectivity
 * ip - manipulate IP information
