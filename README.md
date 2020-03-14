@@ -60,7 +60,11 @@ A place to capture Linux learning
 * echo $VARNAME - display value of shell variable $VARNAME
 * set/unset - set and unset shell options
 * alias - define aliases
+* ^Z - suspend a process (can be resumed via fg or bg)
+* #! - she-bang
+* source <sh> - execute a script without starting another shell
 * screen - manage multiple screens
+* tmux - terminal multi-plexer (like _screen_)
 
 ### Directories & Files
 #### Directories
@@ -99,7 +103,6 @@ A place to capture Linux learning
 * uniq - report or omit repeated lines in a file 
 * split - split a file into pieces
 * expand, unexpand - turns tabs->spaces and vice versa
-* tee - combines redirection and piping, i.e., write out + send as input to another command
 * gzip - most common compression utility
 * find - find files and directories by name, size, owner, etc.
 * grep - search and filter
@@ -110,20 +113,25 @@ A place to capture Linux learning
 * sha256sum - calc SHA-256 (currently recommended hash function)
 
 ### Process Management
-* ps - show processes
+* ps - show processes, often run as 'pas aux'
 * fuser - show which processes use the named files, sockets, or filesystems 
-* kill - kills a process
 * top - display processes and resource consumption
 * jobs - processes associate with a specific shell
 * fg - run process in foreground (from background)
-* bg - moves a process to the background (use ^Z)
+* bg - moves a process to the background (use ^Z to suspend)
 * nice - adjust process priority when starting a process
 * renice - change priority of running process
-* kill - send a signal to a process
-* killall - kill all processes with the same name
+* kill - kill or send signal to a process
+* killall - kill all processes with a given name
+* ^Z - suspend a command (resume via fg and bg)
+* nohup - run command but do not display output on terminal
+	* often combined with & (run process in background)
+* free - display memory stats 
+* watch - watch a command on a period
 
 ### Disks & Storage
 * mount - attach storage to a file system directory
+* umount - unmount a file system
 * tar - create an archive, e.g., tar -cvf, tar -xvf, tar -tvf 
 * dd - copy block devices
 * cfdisk - display or manipulate a partition table
@@ -132,8 +140,6 @@ A place to capture Linux learning
 * lsblk - list block devices
 * partprobe - update kernel after changing partition table
 * mkfs - make file system (various types available, e.g., xfs is default on many distributions)
-* mount - attach a partition and file system to a directory
-* umount - unmount a file system
 * lsof - list open files/what process is using a file
 * findmnt - find out what is mounted and where
 * df - display free disk space
@@ -237,7 +243,12 @@ the dependencies problem, e.g., _yum_
 * Standard input (0): <
 * Standard output (1): >, >>
 * Standard error (2): 2>, e.g., 2>/dev/null
+* & - copies to another file descriptor
+* 2>&1 - copies standard error to standard output
 * &>: redirect both stdout and stderr
+* | - pipe - take output of one command as input to another
+* xargs - build and execute command lines from standard input
+* tee - send output to stdout and to another stream
 
 ## Key Directories
 * / - root of the file system
@@ -262,6 +273,10 @@ the dependencies problem, e.g., _yum_
 
 
 ## Command Examples
+* screen <command> - runs command in a screen session
+* ls >x 2>&1 - stdout is redirected to x and standard error is copied to standard stdout
+* ls >x 2>&1 >y - binds stderror to x and standard output to y
+* dd if=/dev/sda of=bootloader.bak bs=446 count=1 -- takes a copy of the bootloader from primary hard drive
 * tail -f /var/log/messages
 * journalctl --dmesg
 * ip a
