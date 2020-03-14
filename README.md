@@ -36,8 +36,17 @@ A place to capture Linux learning
 ### System-Oriented
 * hostname - information about the current host
 * uname - prints system info
-* date - see date
-* cal - see calendar
+* lsmod - display status of modules in the kernel
+* modprobe - add or remove a module from the kernel
+* rmmod - remove a module from the kernel
+* lspci - shows PCI devices connected to the system
+* poweroff - power system off
+* shutdown - shut down the system
+* wall - send a message to everybody's terminal
+* systemctl - interface into systemd (documented further down in this file as well)
+	* init and telinit are older commands (for SysV) that adjust run levels
+* ldconfig - configure library linker
+* ldd - print shared object dependencies
 
 ### Shell-Oriented
 * time <command> - times the given shell command
@@ -49,6 +58,7 @@ A place to capture Linux learning
 * export VARNAME makes VARNAME available in subshells
 * echo $VARNAME - display value of shell variable $VARNAME
 * alias - define aliases
+* screen - manage multiple screens
 
 ### Directories & Files
 * mkdir - make a directory (-p option for hierarchy)
@@ -83,7 +93,14 @@ A place to capture Linux learning
 ### Process Management
 * ps - show processes
 * kill - kills a process
-* top
+* top - display processes and resource consumption
+* jobs - processes associate with a specific shell
+* fg - run process in foreground (from background)
+* bg - moves a process to the background (use ^Z)
+* nice - adjust process priority when starting a process
+* renice - change priority of running process
+* kill - send a signal to a process
+* killall - kill all processes with the same name
 
 
 ### Disks & Storage
@@ -102,6 +119,10 @@ A place to capture Linux learning
 * findmnt - find out what is mounted and where
 * df - display free disk space
 * du - display disk usage stats
+* lvm - logical volume manager - split disks into smaller sets of pools
+	* volume group - group of hard disks
+	* physical extents - hard disk divisions (pieces)
+	* logical volumes are made up of 1 or more extents
 
 
 ### Network & Connectivity
@@ -137,36 +158,92 @@ A place to capture Linux learning
 * loginctl - performs session management
 
 ### Date & Time
-* hwclock - query or set hardware clock
+* date - show the current date and time
+* cal - display a calendar
+* hwclock - query or set hardware clock - influences the system clock, of course
 * timedatectl - control system time and date
-* ntpdate - set the date and time via ntp
+* ntpdate - set the date and time via ntp (network time protocol)
 * chronyc sources - ntp server info (stratum 1=atomic clock -> 16=error)
 
-### systemd
+### System Management with _systemd_
 * Manages everything
 * Kernel starts systemd -> starts all services
 * Event-driven (reacts)
 * Systemd manages items called "units"
+* Targets are groups of units that describe an end-state that we want Linux to be in
+	* Via targets, we can get the machine in single-user mode, recovery mode, etc.
+	* See _systemctl isolate_
 * /usr/lib/systemd/system
 * systemctl <command> - control commands and services
 	* systemctl service <service>
 	* systemctl list-unit-files
 	* etc.
 
+### Package & Library Management
+*  A package is a tar ball with a script to copy files to the right location + a DB to keep
+track of what is installed
+* Packages use dependencies to get other software that they need
+* Packages are signed for verification and validation, e.g., with GPG keys
+* rpm - package manager for RedHat distros. Does not fetch dependencies! _Software managers_ used to solve
+the dependencies problem, e.g., _yum_
+* rpm -cq <package> provides some useful information about a given package
+* rpm -qp <package> provides other useful information about a package
+* ldd - shows libs used by a given program
+* yum - RedHat software manager, e.g., _yum install_, _yum search_, _yum remove_
+* yum provides - helps find the right package to use
+* yum repolist - shows the repos available and the total number of packages available
+* yum list installed - list all installed packages
+* yum update - update the system
+* yum groups list - list package groups
+* yum history, yum history undo
+* apt - like yum on Ubuntu
+
+### Scheduling Tasks
+* cron - uses crond daemon
+* crontab -e - edit cron tasks (see /etc/crontab)
+* at - run a job once at a given time
+* atq - display jobs in the _at_ queue
+* atrm - remove a job from the _at_ queue
+* systemd timers - more modern solution
+
+### Reading Log Files
+* syslog - legacy service that takes of logging
+* rsyslogd - more modern version of syslog logging
+* systemd-journald - systemd-integrated log service
+* journalctl - client interface to systemd-journald
+* logger - log messages to /var/log/messages
+
+## Redirection
+* Standard input (0): <
+* Standard output (1): >, >>
+* Standard error (2): 2>, e.g., 2>/dev/null
+* &>: redirect both stdout and stderr
+
 ## Key Directories
-* /usr/share/doc - doc for installed packages
+* / - root of the file system
+* /etc - configuration files - mostly text
+* /usr - where user binaries are stored
+* /home - user home directories
+* /boot - stores the boot loader and all boot images
 * /var - system-created files, e.g., /var/log - system log files
-* /bin -> /usr/bin, /sbin -> root command/system binaries
-* /usr - contaqins all of the binaries etc. that computer uses
+* /tmp - unique storage area available to all users
 * /dev - device files - provide access to hardware
-* /etc - configuration file - mostly text
-* /opt - application file, e.g., databases
 * /proc - running processes
+* /sys - virtual file system containing information about kernel subsystems
+* /usr/share/doc - doc for installed packages
+* /bin -> /usr/bin, /sbin -> root command/system binaries
+* /etc/udev - configures hardware and provide rules for hardware events
+* /opt - application files, e.g., databases
 * /dev/zero - "file" that produces zero bytes 
 * /dev/null - swallows unwanted out (byte abyss)
 * /etc/services - services and network configurations for them/with names
+* /etc/ld.so.conf - where shared libs are listed
+* /usr/local/lib - shared libs directory
+
 
 ## Command Examples
+* tail -f /var/log/messages
+* journalctl --dmesg
 * ip a
 * ip route show
 * ip a a dev eth0 1.2.3.4/8
@@ -218,18 +295,33 @@ A place to capture Linux learning
 * chmod g+s /data/account - sets groupid for directory /data/account
 * touch file{a..z} - create a range of files: filea, fileb, ..., filez
 
-## Redirection
-* Standard input (0): <
-* Standard output (1): >, >>
-* Standard error (2): 2>, e.g., 2>/dev/null
-* &>: redirect both stdout and stderr
-
-## Important Ideas
+## Important Ideas & Architectural Components
 * All the work on the machine is ultimately done by the kernel
 * "Kernel land" is the land of core os, drivers and hardware
 * "User land" is where user processes live
 * User "root" lives in kernel land - so has no restrictions
 * To cross from "user land" or "kernel land", user program make system library calls
+* GRUB2 is the current, modern boot loader
+* udev is the device manager
+* dbus - interprocess communications mechanism
+* sysfs - virtual file system mounted by the kernel that presents info about various kernel subsystems.
+See /sys on the file system.
+* procfs - presents info about processes. See /proc.
+* Run levels
+	* tell the system the "mode" in which to boot, e.g., 0=shut down, 3=normal boot
+	* work via scripts ala systemd (older systems use init.d and /etc/inittab)
+	* see /etc/systemd/system, /usr/lib/systemd/system
+* Targets - serve a similar purpose of run levels
+	* seems to be a more modern approach
+	* targets are named (vs. numbered)
+	* made up of _units_, which are declarative
+* Partitions
+	* divide storage into separate pieces
+	* allows dual booting
+	* separation of files
+	* data organization
+	* system protection
+	* mounted to file system
 * A shell is an interface into the OS
 * Linux is very file-oriented - "everything is a file"
 * Files are associated with one and only one *inode* (file metadata/admin data)
