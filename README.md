@@ -119,7 +119,7 @@ A place to capture Linux learning
 * jobs - processes associate with a specific shell
 * fg - run process in foreground (from background)
 * bg - moves a process to the background (use ^Z to suspend)
-* nice - adjust process priority when starting a process
+* nice - adjust process priority when starting a process (-20=higheset priroty -> 19=lowest)
 * renice - change priority of running process
 * kill - kill or send signal to a process
 * killall - kill all processes with a given name
@@ -130,8 +130,12 @@ A place to capture Linux learning
 * watch - watch a command on a period
 
 ### Disks & Storage
-* mount - attach storage to a file system directory
+* File systems organize the disk and prove facilites for directories, files, file naming, 
+journaling, etc. Linux supports a variety of file systems, e.g.,ext4, xfs, etc.
+* mount - show mounts or attach storage to a file system directory
 * umount - unmount a file system
+* mkswap - format a partition as swap space
+* swapon - tell Linux that it can use the swap space from mkswap
 * tar - create an archive, e.g., tar -cvf, tar -xvf, tar -tvf 
 * dd - copy block devices
 * cfdisk - display or manipulate a partition table
@@ -148,7 +152,9 @@ A place to capture Linux learning
 	* volume group - group of hard disks
 	* physical extents - hard disk divisions (pieces)
 	* logical volumes are made up of 1 or more extents
-
+* MBR and GPT are different partition schemes
+	* MBR is older
+	* GPT is newer and supports much larger disk, files, file names, etc. 
 
 ### Network & Connectivity
 * ip - manipulate IP information
@@ -270,7 +276,6 @@ the dependencies problem, e.g., _yum_
 * /etc/services - services and network configurations for them/with names
 * /etc/ld.so.conf - where shared libs are listed
 * /usr/local/lib - shared libs directory
-
 
 ## Command Examples
 * screen <command> - runs command in a screen session
