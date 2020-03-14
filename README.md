@@ -17,6 +17,8 @@ A place to capture Linux learning
 * man man
 * man <section #1-9> help - man pages
 * man -k <keyword> or apropos: sections 1, 5, 8 most important in general
+* manpath - tells us where the man pages are stored
+* type <command> - tells us which type a command is
 * whereis - locate the binary, source, and manual page files for a command
 * which - shows the full path of (shell) commandsq
 * whatis - display manual page descriptions
@@ -45,8 +47,7 @@ A place to capture Linux learning
 * wall - send a message to everybody's terminal
 * systemctl - interface into systemd (documented further down in this file as well)
 	* init and telinit are older commands (for SysV) that adjust run levels
-* ldconfig - configure library linker
-* ldd - print shared object dependencies
+* cloud-init - enables initialization of Linux VMs (including AWS, Azure, etc.)
 
 ### Shell-Oriented
 * time <command> - times the given shell command
@@ -57,30 +58,47 @@ A place to capture Linux learning
 * VARNAME=VARVALUE to define a shell variable
 * export VARNAME makes VARNAME available in subshells
 * echo $VARNAME - display value of shell variable $VARNAME
+* set/unset - set and unset shell options
 * alias - define aliases
 * screen - manage multiple screens
 
 ### Directories & Files
-* mkdir - make a directory (-p option for hierarchy)
+#### Directories
 * pwd - print working directory
+* ~ - refers to logged-in user's home directory
+* mkdir - make a directory (-p option for hierarchy)
 * cd - change directory
-* rm - remove directories and files 
-* ls - list files
+* rmdir - remove directory
+* ln - make a hard link (directly to inode) or symbolic link (to hard link)
+* ls - list files in directory and subdirectories
 * tree - display directories, subdirectories and files in a clear manner
-* touch - create empty file/update metadata
+
+#### Files
 * file - information about a file
 * cat, tac - display or concat files, tac does it in reverse
 * less - text viewer/pager
+* head, tail - show beginning/end of a file
+* touch - create empty file/update metadata
 * cp - copy files
 * mv - move or rename files
-* ln - make a hard link (directly to inode) or symbolic link (to hard link)
+* rm - remove files and directories 
+* stat - displays information about a file or file system
+
+#### File & Text Processing
 * wc - word/line count
-* head - show beginning of file
-* tail - show end of file
 * cut - remove sections from each line of files
 * xxd - hex viewer
 * tr - translate characters
+* fmt - simple text formatter
+* join - join lines of two files on a common field
+* paste - merge lines of files
+* nl - number lines of files
+* od - octal (and other) dumper
+* pr - convert text files for printing
 * sort - sort files or streams, often used in pipes
+* uniq - report or omit repeated lines in a file 
+* split - split a file into pieces
+* expand, unexpand - turns tabs->spaces and vice versa
 * tee - combines redirection and piping, i.e., write out + send as input to another command
 * gzip - most common compression utility
 * find - find files and directories by name, size, owner, etc.
@@ -88,10 +106,12 @@ A place to capture Linux learning
 * egrep - "grep" that can use extended regular expression
 * awk - text processing, search for specific patterns
 * sed - powerful command-line stream editor
-* fuser - show which processes use the named files, sockets, or filesystems 
+* md5sum - calc MD5 sum of a set of bytes (considered obsolete in 2020)
+* sha256sum - calc SHA-256 (currently recommended hash function)
 
 ### Process Management
 * ps - show processes
+* fuser - show which processes use the named files, sockets, or filesystems 
 * kill - kills a process
 * top - display processes and resource consumption
 * jobs - processes associate with a specific shell
@@ -101,7 +121,6 @@ A place to capture Linux learning
 * renice - change priority of running process
 * kill - send a signal to a process
 * killall - kill all processes with the same name
-
 
 ### Disks & Storage
 * mount - attach storage to a file system directory
@@ -189,6 +208,7 @@ the dependencies problem, e.g., _yum_
 * rpm -cq <package> provides some useful information about a given package
 * rpm -qp <package> provides other useful information about a package
 * ldd - shows libs used by a given program
+* ldconfig - configure library linker
 * yum - RedHat software manager, e.g., _yum install_, _yum search_, _yum remove_
 * yum provides - helps find the right package to use
 * yum repolist - shows the repos available and the total number of packages available
@@ -323,6 +343,13 @@ See /sys on the file system.
 	* system protection
 	* mounted to file system
 * A shell is an interface into the OS
+* In the shell
+	* ; separates commands
+	* \c escapes character c
+	* single quoting hides special characters from the shell, e.g., echo 'ls; date' will prevent the shell from interpreting the ;
+	* double quotes hide some metacharacters from the shell, but some are still processed, e.g., the $ is processed when
+	used in double quotes
+	
 * Linux is very file-oriented - "everything is a file"
 * Files are associated with one and only one *inode* (file metadata/admin data)
 * Hard links point directly to inodes
