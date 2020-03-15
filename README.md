@@ -2,7 +2,6 @@
 A place to capture Linux learning
 
 ## Essential Commands
-* _Note_ most commands accept --help
 
 ### Console Commands
 * ^l - clear the screen
@@ -14,6 +13,7 @@ A place to capture Linux learning
 
 ### Help & Doc
 * For shell builtins, use _help_ <builtin> vs. --help or _man_!
+* Most commands accept __--help__
 * mandb - refresh man pages
 * man man
 * man <section #1-9> help - man pages
