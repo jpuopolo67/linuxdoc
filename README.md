@@ -410,6 +410,7 @@ the dependencies problem, e.g., _yum_
 * grep amy /etc/* amy 2>/dev/null
 * grep -i hello demofile
 * ps aux | grep ssh | -v grep
+* find . -name '*.java' | xargs grep -l 'while'
 * grep -R root *
 * grep -Rl root *
 * grep -A3 amy /etc/passwd
